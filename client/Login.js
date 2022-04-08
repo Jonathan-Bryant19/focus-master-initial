@@ -1,32 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 export default function Login() {
-  const [count, setCount] = useState(0)
+//   const [count, setCount] = useState(0)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    fetch('http://localhost:3000/hello', {
-      method: "GET",
-      credentials: "include"
-    })
-      .then((r) => r.json())
-      .then((data) => setCount(data.count))
-  }, [])
+//   useEffect(() => {
+//     fetch('http://localhost:3000/hello', {
+//       method: "GET",
+//       credentials: "include"
+//     })
+//       .then((r) => r.json())
+//       .then((data) => setCount(data.count))
+//   }, [])
 
   const Stack = createStackNavigator();
+  const navigation = useNavigation();
 
   return (
       <View style={styles.container}>
         <Text style={styles.heading}>Focus Master</Text>
+        <Text style={styles.subheading}>Login</Text>
         <TextInput
           style={styles.input}
-          label="Email"
-          placeholder="Type your email here"
+          label="Username"
+          placeholder="Type your username here"
           value={email}
           onChangeText={setEmail}
         />
@@ -45,29 +47,14 @@ export default function Login() {
           accessibilityLabel="Login button"
         />
         <Button
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Signup')}
           title="Sign Up"
           color="red"
           accessibilityLabel="Sign Up button"
         />
-        {/* <TextInput
-          style={styles.input}
-          label="Confirm password"
-          placeholder="Re-type your password here"
-          onSubmitEditing={(e) => {
-            confirmPasswordsMatch(e.nativeEvent.text, password);
-          }}
-          secureTextEntry
-        /> */}
         <StatusBar style="auto" />
       </View>
   );
-}
-
-function confirmPasswordsMatch(confirmationPassword, originalPassword) {
-  if (confirmationPassword !== originalPassword) {
-    alert('Passwords do not match, please try again.');
-  }
 }
 
 const styles = StyleSheet.create({
@@ -80,8 +67,13 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 50,
     fontSize: 70,
-    fontWeight: 'bold',
-    justifyContent: 'flex-start'
+    fontWeight: 'bold'
+  },
+  subheading: {
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 40,
+    fontWeight: 'bold'
   },
   input: {
     height: 40,
